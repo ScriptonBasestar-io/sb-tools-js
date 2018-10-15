@@ -1,0 +1,12 @@
+{
+  "name": "bs-WebGrimPan",
+  "description": "job project",
+  "version": "0.0.1",
+  "homepage": "https://tools.beansugar.org",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "jquery": "~1.11.1"
+  }
+}

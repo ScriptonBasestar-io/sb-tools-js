@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>LineDrawCanvas</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="http://static.beansugar.org/jquery-plugins/colorpicker/css/colorpicker.css" />
+	<link rel="stylesheet" media="screen" type="text/css" href="http://static.beansugar.org/ui/dhtmlx/slider/dhtmlxSlider_v403_std/codebase/dhtmlxslider.css">
+	<style>
+		/*Slider*/
+		#sliderObj {
+			width: 160px;
+			height: 30px;
+		}
+	</style>
+	<style>
+		body {
+			margin: 0px;
+			padding: 0px;
+		}
+		canvas{
+			border: 1px solid black;
+			cursor: crosshair;
+		}
+		.palettes{
+			width : 400px;
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+		.palettes > *{
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.palettes > *:not(:first-child){
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+<!--<canvas id="myPalette"></canvas>-->
+<!--<div id="Inline"></div>-->
+<div class="palettes">
+	<div id="colorpickerHolder"></div>
+	<div id="brushpickerHolder">
+		<button type="button" class="btn btn-block btn-info">butt</button>
+		<button type="button" class="btn btn-block btn-info">round</button>
+		<button type="button" class="btn btn-block btn-info">square</button>
+	</div>
+	<div id="colorpickerHistory"></div>
+</div>
+<canvas id="myCanvas" width="600" height="800"></canvas>
+
+
+<!--BaseScript-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<!--Canvas-->
+<script>
+	//그리기 스크립트
+	var canvas = document.getElementById('myCanvas');
+	var context = canvas.getContext('2d');
+
+	var mouseLeftPressed = false;
+
+	var brushColor = "#ffffff";
+	var brushThick = 1;
+	//	var brushTip = "round";
+
+	$('#myCanvas').mousedown(function(event){
+		context.beginPath();
+		mouseLeftPressed = true;
+		brushThick = $( "#brushpickerHolder" ).slider("value");
+		brushColor = $("#colorpickerHolder .colorpicker_current_color").css('backgroundColor');
+		brushTip = "round"
+	});
+	$('#myCanvas').mouseup(function(event){
+		mouseLeftPressed = false;
+	});
+	$('#myCanvas').mousemove(function(event){
+		if(mouseLeftPressed){
+			var x = event.pageX - canvas.offsetLeft;
+			var y = event.pageY - canvas.offsetTop;
+			context.lineTo(x, y);
+
+			context.strokeStyle = brushColor;
+			context.lineWidth = brushThick;
+			context.lineCap = brushTip;
+			context.stroke();
+		}
+	});
+</script>
+<!--color picker-->
+<script type="text/javascript" src="http://static.beansugar.org/jquery-plugins/colorpicker/js/colorpicker.js"></script>
+<script type="text/javascript">
+	$('#colorpickerHolder').ColorPicker({flat: true});
+</script>
+<!--Brush Size-->
+<script>
+	$(function(){
+		$("#brushpickerHolder").slider(
+				{
+					min:1,
+					step:1,
+					max:100
+				}
+		);
+	});
+</script>
+<!--color picker history-->
+<script>
+	$("#colorpickerHolder .colorpicker_current_color").on("styleChanged", function(event){
+		var bgColor = $(this).css("backgroundColor");
+		$("#colorpickerHistory").append('<div style="float:left;heiht:10px;weight;10px;background-color:'+bgColor+'"></div>');
+	});
+</script>
+
+</body>
+</html>      

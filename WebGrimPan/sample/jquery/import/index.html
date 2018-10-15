@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<div class="left_menu" include="left_menu.html"></div>
+<div class="content" include="${contents}"></div>
+<div class="footer" include="footer.html"></div>
+
+<script src="../../static/jquery/jquery-2.1.1.min.js"></script>
+<script>
+	$(".left_menu").load($(".left_menu").attr("include"));
+	$(".footer").load($(".footer").attr("include"));
+</script>
+</body>
+</html>

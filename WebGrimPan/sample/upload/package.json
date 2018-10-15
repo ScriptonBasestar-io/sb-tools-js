@@ -1,0 +1,9 @@
+{
+	"name": "application-name",
+	"version": "0.0.1",
+	"author": "archmagece <archmagece@gmail.com>",
+	"dependencies": {
+		"socket.io": ">= 1.2.1",
+		"socketio-file-upload": ">= 0.2.7"
+	}
+}

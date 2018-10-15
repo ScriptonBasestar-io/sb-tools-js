@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>LineDrawCanvas</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="http://static.beansugar.org/bootstrap/2.3.2/css/bootstrap.min.css"/>
+	<link rel="stylesheet" media="screen" type="text/css" href="http://static.beansugar.org/ui/dhtmlx/slider/dhtmlxSlider_v403_std/codebase/dhtmlxslider.css">
+	<style>
+		/*Slider*/
+		#sliderObj {
+			width: 160px;
+			height: 30px;
+		}
+	</style>
+	<style>
+		body {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		canvas {
+			border: 1px solid black;
+			cursor: crosshair;
+		}
+
+		.palettes {
+			width: 400px;
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+
+		.palettes > * {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.palettes > *:not(:first-child) {
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+
+<img src="assets/brush2.png" id="mugImage" width="25%" height="25%">
+<input type="text" id="mugColor" value="#6491ee">
+<input type="button" value="change color" id="mugButton">
+
+<!--<canvas id="myPalette"></canvas>-->
+<!--<div id="Inline"></div>-->
+<div class="palettes">
+	<div id="colorpickerHolder"></div>
+	<div id="brushSliderHolder"></div>
+	<div id="brushpickerHolder">
+		<button type="button" class="btn btn-block btn-info brushBtn" value="butt">butt</button>
+		<button type="button" class="btn btn-block btn-info brushBtn" value="round">round</button>
+		<button type="button" class="btn btn-block btn-info brushBtn" value="square">square</button>
+		<button type="button" class="btn btn-block btn-info brushBtn" value="assets/brush.png">Image:brush</button>
+		<button type="button" class="btn btn-block btn-info brushBtn" value="assets/brush2.png">Image:brush2</button>
+	</div>
+	<div id="colorpickerHistory"></div>
+</div>
+
+<canvas id="myCanvas" width="600" height="800"></canvas>
+
+
+<!--BaseScript-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script src="js/modernizr.custom.34982.js"></script>
+<script src="js/trigonometry.js"></script>
+<script src="js/image_tools.js"></script>
+<script src="js/sketcher.js"></script>
+
+<script>
+	//Canvas
+	var sketcher = null;
+	var brush = null;
+	var brush2 = null;
+
+	$(document).ready(function(e) {
+		sketcher = new Sketcher( "myCanvas");
+
+//		brush = new Image();
+//		brush.src = 'assets/brush.png';
+//		brush2 = new Image();
+//		brush2.src = 'assets/brush2.png';
+//		brush.onload = function(){
+//			sketcher = new Sketcher( "myCanvas", brush );
+//			sketcher = new Sketcher( "myCanvas");
+//		}
+		//Brush Size
+		//http://jqueryui.com/slider/#default
+		$("#brushSliderHolder").slider(
+				{
+					min: 1,
+					step: 1,
+					max: 100,
+					change:function(event, ui){
+						console.log(event, ui);
+						sketcher.changeBrushThickness(ui.value)
+					}
+				}
+		);
+		$(".brushBtn").click(function(){
+			sketcher.changeBrushTip($(this).val());
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var mug = document.getElementById("mugImage");
+		var i = new ImageController(mug);
+		var bgColor = document.getElementById("mugColor").value;
+
+		$("#mugButton").click(function(){
+			i.changeColor(bgColor);
+			console.log("mugsrc", i.mug.src)
+
+			sketcher.changeBrushColor(bgColor);
+			$("#colorpickerHistory").append('<div style="float:left;height:10px;weight;10px;background-color:' + bgColor + '"></div>');
+		});
+	});
+</script>
+
+</body>
+</html>

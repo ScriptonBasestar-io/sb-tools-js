@@ -1,0 +1,4 @@
+wColorPicker 
+https://github.com/websanova/wColorPicker
+colorpicker
+http://www.eyecon.ro/colorpicker/

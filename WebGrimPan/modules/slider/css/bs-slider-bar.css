@@ -1,0 +1,30 @@
+/**
+ * @author archmagece
+ * @since 2014-08-25-15
+ * @with WebGrimPan
+ */
+
+.BsPullLeft{
+	float: left;!important;
+}
+.BsPullRight{
+	float: right;!important;
+}
+
+.BsSliderBackboneStyle{
+	display: block;
+	width:150px;
+	height:30px;
+}
+.BsSliderTipNo01{
+	background: red;
+	width:10px;
+	height:20px;
+	border-radius: 3px 3px;
+}
+
+.BsSliderTipStyle{
+	display: inline;
+	float: none;
+	vertical-align: middle;
+}

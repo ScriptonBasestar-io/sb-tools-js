@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>LineDrawCanvas</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="http://static.beansugar.org/bootstrap/2.3.2/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<canvas id="previewCanvas" witth="300" height="200"></canvas>
+<input type="file" id="fileSelector" name="profileImage">
+<div id="previewList"></div>
+
+<!--BaseScript-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.js"></script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script>
+	//이미지 미리 표시해주기 html canvas
+	$("#fileSelector").change(function(){
+		var ctx = document.getElementById('previewCanvas').getContext('2d')
+				, img = new Image()
+				, f = document.getElementById("fileSelector").files[0]
+				, url = window.URL || window.webkitURL
+				, src = url.createObjectURL(f);
+
+		img.src = src;
+		img.onload = function(){
+			ctx.drawImage(img,0,0);
+			url.revokeObjectURL(src);
+		}
+	});
+	//이미지 미리 표시해주기
+	document.getElementById('fileSelector').addEventListener('change', handleFileSelect, false);
+	function handleFileSelect(evt) {
+		var files = evt.target.files;
+		var f = files[0];
+		var reader = new FileReader();
+
+		reader.onload = (function(theFile) {
+			return function(e) {
+				document.getElementById('previewList').innerHTML = ['<img src="', e.target.result,'" title="', theFile.name, '" width="50" />'].join('');
+			};
+		})(f);
+
+		reader.readAsDataURL(f);
+	}
+</script>
+</body>
+</html>

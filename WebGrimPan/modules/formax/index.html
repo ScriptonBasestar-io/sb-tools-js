@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<form method="post" action="search" id="searchForm">
+	<input type="text" name="keyword" placeholder="검색어"/>
+	<button type="button" id="searchButton">검색</button>
+</form>
+
+<br/>
+<a href="javascript:search1();">search1번방식 </a>
+<br/>
+<a href="javascript:search2();">search2번방식 </a>
+<br/>
+<a href="javascript:search3();">search3번방식 </a>
+<br/>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/formax.js"></script>
+<script>
+	/**
+	 * 기본기능을 써서 기본 포멧으로 호출
+	 */
+	function search1(){
+		formAx.callAjaxRequestBody({
+			url: "sample/response.json",
+			data: formAx.createRequestJson("ko", formAx.formDataEachInput($("#searchForm"))),
+			success: function(data){
+				console.log("success", data);
+			}
+		});
+	}
+	/**
+	 * data 구조를 변경해서 전송
+	 */
+	function search2(){
+		formAx.callAjaxRequestBody({
+			url: "sample/response.json",
+			data: {
+				lang: "ko",
+				requestAt: new Date().getTime(),
+				ajaxRequest : formAx.formDataEachInput($("#searchForm"))
+			},
+			success: function(data){
+				console.log("success", data);
+			}
+		});
+	}
+	/**
+	 * 폼의 id만 전송해서 기본형태로 사용.
+	 */
+	function search3(){
+		formAx.callAjaxRequestBody({
+			url: "sample/response.json",
+			formId: "#searchForm",
+//			formId: "searchForm",
+			success: function(data){
+				console.log("success", data);
+			}
+		});
+	}
+</script>
+</body>
+</html>

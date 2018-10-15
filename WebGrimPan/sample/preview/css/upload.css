@@ -1,0 +1,18 @@
+/**
+ * @author archmagece
+ * @since 2014-09-21 22
+ */
+
+#BsUploadPreviewScreen {
+	display: inline-block;
+	padding: 5px 5px 5px 5px;
+	width:100%
+}
+#BsUploadPreviewScreen > div {
+	float: left;
+	display: block;
+	background: #f9f9f9;
+	border-width: 1;
+	padding: 5px 5px 5px 5px;
+	margin: 5px 5px 5px 5px;
+}

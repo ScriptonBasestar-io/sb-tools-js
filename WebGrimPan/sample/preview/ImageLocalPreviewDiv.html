@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>LineDrawCanvas</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="http://static.beansugar.org/bootstrap/2.3.2/css/bootstrap.min.css"/>
+	<link rel="stylesheet" media="screen" type="text/css" href="css/upload.css"/>
+</head>
+<body>
+
+<div>
+	<form id="BsUploadMainForm" method="post" action="/">
+		<div id="BsUploadFileInputWrapper" style="display: none;"></div>
+	</form>
+	<div id="BsUploadControllerGroup">
+		<input id="BsUploadFileInputTmpl" type="file" name="file" />
+		<!--<input id="fileInputTmpl" type="file" name="file" hidden="hidden" />-->
+		<button type="button" class="btn btn-warning add">
+			AddFile
+		</button>
+		<button type="button" class="btn btn-warning upload">
+			Upload
+		</button>
+		<button type="button" class="btn btn-warning clear">
+			Clear
+		</button>
+	</div>
+	<form id="BsUploadFileForm">
+
+	</form>
+	<div id="BsUploadPreviewScreen"></div>
+</div>
+
+<!--BaseScript-->
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.50/jquery.form.min.js"></script>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="../../libs/collection/fixed_size_queue.js"></script>
+<script type="text/javascript" src="js/upload.js"></script>
+<script>
+//	function BsFileUpload(MainFormId, MainFormFileInputWrapperId, BsUploadFormId, BsUploadFileInputWrapperId, BsUploadControllerGroupId, BsUploadPreviewScreenId, imageCnt){
+//		function BsFileUpload(MainFormId, MainFormFileInputWrapperId, BsUploadFormId, BsUploadFileInputWrapperId, BsUploadControllerGroupId, BsUploadPreviewScreenId, imageCnt){
+	new BsFileUpload("BsUploadMainForm", "BsUploadFileInputWrapper", "BsUploadFileForm", "BsUploadFileInputWrapper", "BsUploadControllerGroup", "BsUploadPreviewScreen", 3);
+</script>
+</body>
+</html>
